@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form</title>
+</head>
+<body>
+    <h1>Simple Form</h1>
+    <form id="reportForm" method="post">
+        <!-- Date Inputs -->
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" name="start-date" required>
+        <br><br>
+
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" name="end-date" required>
+        <br><br>
+
+        <!-- Time Inputs -->
+        <label for="start-time">Start Time:</label>
+        <input type="time" id="start-time" name="start-time" required>
+        <br><br>
+
+        <label for="end-time">End Time:</label>
+        <input type="time" id="end-time" name="end-time" required>
+        <br><br>
+
+        <!-- Select Box -->
+        <label for="options">Choose Country:</label>
+        <select id="country" name="options" required>
+            <option value="" disabled selected></option>
+            <option value="nemecko">Nemecko</option>
+            <option value="rakousko">Rakousko</option>
+            <option value="polsko">Polsko</option>
+        </select>
+        <br><br>
+
+        <!-- Submit Button -->
+        <button type="submit">Submit</button>
+    </form>
+   <script>
+        // Bind form submit to a custom action
+        document.getElementById('infoForm').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+
+            // Get form data
+            const startDay = document.getElementById('start-date').value;
+            const endDay = document.getElementById('end-date').value;
+            const startTime = document.getElementById('start-time').value;
+            const endTime = document.getElementById('end-time').value;
+            const country = document.getElementById('country').value;
+
+        });
+    </script>
+</body>
+</html>
