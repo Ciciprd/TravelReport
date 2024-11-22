@@ -92,7 +92,7 @@
                 if (targetLine) {
                     const values = targetLine.split("|");
                     const exchangeRate = values[values.length - 1];
-                    kurz.value = exchangeRate;
+                    kurz.textContent = exchangeRate;
                     console.log("Exchange rate for EUR:", exchangeRate.trim());
                 } else {
                     console.log("Target line not found in the data.");
