@@ -75,7 +75,7 @@
 
         async function fetchExchangeRate(string date) {
             const url = "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt?date=" + date;
-            const kurz = document.getElementById('kurz').value;
+            const kurz = document.getElementById('kurz');
             
             try {
                 // Fetch the data from the URL
