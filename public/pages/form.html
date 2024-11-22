@@ -10,7 +10,7 @@
     <form id="reportForm" method="post">
         <!-- Date Inputs -->
         <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" name="start-date" required>
+        <input type="date" id="start-date" name="start-date" onchange="fetchExchangeRate(this.value)" required>
         <br><br>
 
         <label for="end-date">End Date:</label>
@@ -42,6 +42,10 @@
         </select>
         <br><br>
 
+        <label for="kurz">Kurz</label>
+        <input type="text" id="kurz" name="kurz" required>
+        <br><br>
+
         <!-- Submit Button -->
         <button type="submit">Submit</button>
     </form>
@@ -68,6 +72,37 @@
                 });
             }
         }
+
+        async function fetchExchangeRate(string date) {
+            const url = "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt?date=" + date;
+            const kurz = document.getElementById('kurz').value;
+            
+            try {
+                // Fetch the data from the URL
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+        
+                // Read the response as text
+                const data = await response.text();
+                const lines = data.split("\n");
+                const targetLine = lines.find(line => line.includes("EMU|euro|1|EUR"));
+    
+                if (targetLine) {
+                    const values = targetLine.split("|");
+                    const exchangeRate = values[values.length - 1];
+                    kurz.value = exchangeRate;
+                    console.log("Exchange rate for EUR:", exchangeRate.trim());
+                } else {
+                    console.log("Target line not found in the data.");
+                }
+            } catch (error) {
+                console.error("Error fetching or processing data:", error);
+            }
+        }
+
+       
         // Bind form submit to a custom action
         document.getElementById('infoForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
