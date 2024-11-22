@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Simple Form</title>
+    <title>Travel Report Form</title>
 </head>
 <body>
-    <h1>Simple Form</h1>
+    <h1>Travel Report Form</h1>
     <form id="reportForm" method="post">
         <!-- Date Inputs -->
         <label for="start-date">Start Date:</label>
@@ -30,9 +30,14 @@
         <label for="options">Choose Country:</label>
         <select id="country" name="options" required>
             <option value="" disabled selected></option>
-            <option value="nemecko">Nemecko</option>
-            <option value="rakousko">Rakousko</option>
-            <option value="polsko">Polsko</option>
+            <option value="Germany">Germany</option>
+            <option value="Austria">Austria</option>
+            <option value="Poland">Poland</option>
+        </select>
+
+        <label for="options">Choose City:</label>
+        <select id="city" name="options" required>
+            <option value="" disabled selected></option>
         </select>
         <br><br>
 
@@ -40,6 +45,28 @@
         <button type="submit">Submit</button>
     </form>
    <script>
+        const data = {
+            Germany: ["Berlin", "Nürnberg", "München"],
+            Austria: ["Wien", "Salzburg", "St. Polten"],
+            Poland: ["Warsaw"]
+        };
+       function updateCities() {
+            const country = document.getElementById('country').value;
+            const city = document.getElementById('city');
+
+            // Clear the current options
+            itemsSelect.innerHTML = '<option value="" disabled selected></option>';
+
+            // Add new options if a category is selected
+            if (country && data[country]) {
+                data[country].forEach(item => {
+                    const option = document.createElement('option');
+                    option.value = item;
+                    option.textContent = item;
+                    itemsSelect.appendChild(option);
+                });
+            }
+        }
         // Bind form submit to a custom action
         document.getElementById('infoForm').addEventListener('submit', function(event) {
             event.preventDefault(); // Prevent default form submission
