@@ -28,12 +28,13 @@
 
         <!-- Select Box -->
         <label for="options">Choose Country:</label>
-        <select id="country" name="options" required>
+        <select id="country" name="options" onchange="updateOptions()" required>
             <option value="" disabled selected></option>
             <option value="Germany">Germany</option>
             <option value="Austria">Austria</option>
             <option value="Poland">Poland</option>
         </select>
+        <br><br>
 
         <label for="options">Choose City:</label>
         <select id="city" name="options" required>
