@@ -10,7 +10,7 @@
     <form id="reportForm" method="post">
         <!-- Date Inputs -->
         <label for="start-date">Start Date:</label>
-        <input type="date" id="start-date" name="start-date" onchange="fetchExchangeRate(this.value)" required>
+        <input type="date" id="start-date" name="start-date" oninput="fetchExchangeRate(this.value)" required>
         <br><br>
 
         <label for="end-date">End Date:</label>
