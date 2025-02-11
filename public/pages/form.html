@@ -44,7 +44,7 @@
 
         <label for="exchange-rate">Kurz</label>
         <input type="text" id="exchange-rate" name="exchange-rate" required>
-        <button id="get-exchange-rate"></button>
+        <button id="get-exchange-rate">Get Exchange Rate</button>
         <br><br>
 
         <!-- Submit Button -->
@@ -103,8 +103,9 @@
             }
         }
 
-       document.getElementById('get-exchange-rate').addEventListener('submit', async function(event) {
+       document.getElementById('get-exchange-rate').addEventListener('click', async function(event) {
            event.preventDefault(); // Prevent default action
+           console.log("Event started.");
            const date = document.getElementById('start-date').value;
            await fetchExchangeRate(date);
        });
