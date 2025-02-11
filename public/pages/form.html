@@ -42,8 +42,9 @@
         </select>
         <br><br>
 
-        <label for="kurz">Kurz</label>
-        <input type="text" id="kurz" name="kurz" required>
+        <label for="exchange-rate">Kurz</label>
+        <input type="text" id="exchange-rate" name="exchange-rate" required>
+        <button id="get-exchange-rate"></button>
         <br><br>
 
         <!-- Submit Button -->
@@ -75,7 +76,7 @@
 
         async function fetchExchangeRate(date) {
             const url = "https://www.cnb.cz/cs/financni-trhy/devizovy-trh/kurzy-devizoveho-trhu/kurzy-devizoveho-trhu/denni_kurz.txt?date=" + date;
-            const kurz = document.getElementById('kurz');
+            const exchangeRate = document.getElementById('exchange-rate');
             
             try {
                 // Fetch the data from the URL
@@ -92,7 +93,7 @@
                 if (targetLine) {
                     const values = targetLine.split("|");
                     const exchangeRate = values[values.length - 1];
-                    kurz.textContent = exchangeRate;
+                    exchangeRate.textContent = exchangeRate;
                     console.log("Exchange rate for EUR:", exchangeRate.trim());
                 } else {
                     console.log("Target line not found in the data.");
@@ -102,6 +103,11 @@
             }
         }
 
+       document.getElementById('get-exchange-rate').addEventListener('submit', async function(event) {
+           event.preventDefault(); // Prevent default action
+           const date = document.getElementById('start-date').value;
+           await fetchExchangeRate(date);
+       });
        
         // Bind form submit to a custom action
         document.getElementById('report-form').addEventListener('submit', function(event) {
